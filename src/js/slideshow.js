@@ -24,6 +24,8 @@ var SlideShow;
 			SlideShow.currentThumb = thumb;
 			if (Config.get(conflargeImages)) {
 				thumb.data("content").find("#image").attr("src", thumb.data("content").attr("data-file-url"));
+			} else {
+				thumb.data("content").find("#image").attr("src", thumb.data("content").attr("data-large-url"));
 			}
 			SlideShowHTML.modalImg.html(thumb.data("content"));
 			SlideShowHTML.modalImg.find("#note-container").remove();
