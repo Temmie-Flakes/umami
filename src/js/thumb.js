@@ -124,23 +124,24 @@ var Thumbs;
 		downloadContent: (thumb, cb) => {
 			if (thumb.length < 1) return;
 			let imgUrl=null;
-			if (typeof thumb.data("content") !== "undefined") {
-				switch (Config.get(confPostResolution)) {
+			if (typeof thumb.data("content") !== "undefined") { // parses the thumb.data("content") to find the specified url
+ 				switch (Config.get(confPostResolution)) {
 					case "high":
 						imgUrl=thumb.data("content").attr("data-file-url");
 						break;
 					case "low":
 						if (thumb.data("content").find("#image").is("video")){
-							imgUrl=Object.values(JSON.parse(thumb.data("content").attr("data-post")).sample.alternates)[0].urls[0];
+							// for some reason the "480p" urls can be higher res than the 720p for videos that are not 16/9. websites fault. 
+							imgUrl=Object.values(JSON.parse(thumb.data("content").attr("data-post")).sample.alternates.samples)[0].url;
 						} else {
-							imgUrl=thumb.data("content").attr("data-large-url");
+							imgUrl=thumb.data("content").attr("data-sample-url");
 						}
 						break;
 					case "default":
 					default:
 						break;
 				}
-				if (imgUrl!==null && imgUrl!=thumb.data("content").find("#image").attr("src")){
+				if (imgUrl!==null && imgUrl!=thumb.data("content").find("#image").attr("src")){// if the wanted url does not match the current url, refectch the image.
 					thumb.removeData("content");
 				}
 			}
@@ -175,9 +176,9 @@ var Thumbs;
 								break;
 							case "low":
 								if (thumb.data("content").find("#image").is("video")){
-									thumb.data("content").find("#image").attr("src", Object.values(JSON.parse(thumb.data("content").attr("data-post")).sample.alternates)[0].urls[0]);
+									thumb.data("content").find("#image").attr("src", Object.values(JSON.parse(thumb.data("content").attr("data-post")).sample.alternates.samples)[0].url);
 								} else {
-									thumb.data("content").find("#image").attr("src", thumb.data("content").attr("data-large-url"));
+									thumb.data("content").find("#image").attr("src", thumb.data("content").attr("data-sample-url"));
 								}
 								thumb.data("content").find("#image").find("source").remove();
 								break;
