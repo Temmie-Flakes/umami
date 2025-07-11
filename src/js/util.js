@@ -267,8 +267,8 @@ var Util;
 			// UtilHTML.testIfCustomPaginateExists();
 			UtilHTML.prevLink = UtilHTML.getPrevLink();
 			UtilHTML.nextLink = UtilHTML.getNextLink();
-			$("<link>").attr("href", browser.extension.getURL("css/umami.css")).attr("rel", "stylesheet").addClass("WG-reload-remove").appendTo("head");
-			$("<link>").attr("href", browser.extension.getURL("css/bootstrap.min.css")).attr("rel", "stylesheet").addClass("WG-reload-remove").appendTo("head");
+			$("<link>").attr("href", browser.runtime.getURL("css/umami.css")).attr("rel", "stylesheet").addClass("WG-reload-remove").appendTo("head");
+			$("<link>").attr("href", browser.runtime.getURL("css/bootstrap.min.css")).attr("rel", "stylesheet").addClass("WG-reload-remove").appendTo("head");
 			return Promise.resolve();
 		},
 		bind: () => {

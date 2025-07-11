@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "umami",
     "version": "2.7.0",
     "description": "e621 enhancement",
@@ -10,10 +10,7 @@
     "permissions": [
         "tabs",
         "downloads",
-        "storage",
-        "*://*.e621.net/*",
-        "*://*.e926.net/*",
-        "*://*.e6ai.net/*"
+        "storage"
     ],
     "content_scripts": [{
         "matches": [
@@ -47,17 +44,25 @@
         ]
     }],
     "background": {
-        "page": "umami.html"
-    },
-    "applications": {
-        "gecko": {
-            "id": "umami@wlf.io"
-        }
+        "service_worker": "background.js"
     },
     "web_accessible_resources": [
-        "css/*",
-        "fonts/*",
-        "html/*",
-        "pagejs/*"
+        {
+             "resources": [
+                "css/*",
+                "fonts/*",
+                "html/*",
+                "pagejs/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }  
+    ],
+    "content_security_policy": {},
+    "host_permissions": [
+        "*://*.e621.net/*",
+        "*://*.e6ai.net/*",
+        "*://*.e926.net/*"
     ]
 }
