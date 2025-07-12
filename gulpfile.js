@@ -46,7 +46,7 @@ gulp.task('scripts', (done) => {
 
 gulp.task('copy', (done) => {
     return gulp
-        .src(["css/*", "fonts/*", "html/**/*", "pagejs/*", "icons/*", "LICENSE", "umami.html", "lib/browser-polyfill.js"].map(f => "src/" + f))
+        .src(["css/*", "fonts/*", "html/**/*", "pagejs/*", "icons/*", "LICENSE", "background.js", "lib/browser-polyfill.js"].map(f => "src/" + f))
         .pipe(plugins.copy(config.outputDir, { prefix: 1 }))
         .pipe(gulp.dest(config.outputDir));
 });
@@ -96,7 +96,7 @@ gulp.task('src', gulp.series(["chrome-manifest"], function () {
 
 gulp.task('watch', gulp.series(['build'], done => {
     gulp
-        .watch(['src/js/*.js', 'src/umami.js', 'src/html/**/*'], { delay: 2000 }, gulp.series(['copy', 'scripts']));
+        .watch(['src/js/*.js', 'src/umami.js', 'src/background.js'], { delay: 2000 }, gulp.series(['copy', 'scripts']));
 }));
 
 gulp.task('default', gulp.series(['build']));
